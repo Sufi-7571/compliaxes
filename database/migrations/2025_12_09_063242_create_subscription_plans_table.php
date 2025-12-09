@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('name');
             $table->decimal('price', 10, 2);
             $table->integer('max_websites');
-            $table->integer('scans_per_week');
+            $table->integer('scans_per_week')->nullable();
             $table->boolean('fix_suggestions')->default(false);
             $table->boolean('pdf_export')->default(false);
             $table->boolean('api_access')->default(false);
