@@ -1,5 +1,9 @@
 <nav
-    class="bg-white/90 backdrop-blur-md shadow-md fixed w-full lg:w-[calc(100%-20rem)] top-0 lg:top-6 z-50 border border-gray-100 lg:mx-40 lg:rounded-2xl">
+    class="bg-white/90 backdrop-blur-md shadow-md fixed 
+            w-[calc(100%-2rem)] mx-4 rounded-lg    <!-- Mobile -->
+            lg:w-[calc(100%-20rem)] lg:mx-40 lg:rounded-2xl  <!-- Desktop -->
+            top-6 z-50 border border-gray-100">
+
     <div class="max-w-8xl mx-auto px-4 sm:px-6 lg:px-10">
         <div class="flex justify-between h-18 items-center">
             <div class="flex-shrink-0 flex items-center">
@@ -95,22 +99,17 @@
             <!-- Mobile menu button -->
             <div class="lg:hidden">
                 <button type="button" id="mobile-menu-button"
-                    class="text-gray-700 hover:text-purple-600 focus:outline-none p-2">
+                    class="text-gray-700 hover:text-purple-600 focus:outline-none p-2 relative">
 
-                    <!-- Modern Hamburger (distinct style) -->
-                    <svg id="hamburger-icon" class="h-7 w-7 transition-transform duration-300" fill="none"
-                        stroke="currentColor" stroke-width="1.8" stroke-linecap="round" viewBox="0 0 24 24">
-                        <path d="M4 7h16" />
-                        <path d="M7 12h13" />
-                        <path d="M10 17h10" />
-                    </svg>
-
-                    <!-- Close Icon -->
-                    <svg id="close-icon" class="h-7 w-7 hidden transition-transform duration-300" fill="none"
-                        stroke="currentColor" stroke-width="2" stroke-linecap="round" viewBox="0 0 24 24">
-                        <path d="M6 6l12 12" />
-                        <path d="M6 18L18 6" />
-                    </svg>
+                    <!-- Modern Hamburger with smooth animation -->
+                    <div class="w-7 h-7 flex flex-col justify-center items-center gap-1.5 transition-all duration-300">
+                        <span id="line1"
+                            class="block w-6 h-0.5 bg-current transition-all duration-300 ease-in-out"></span>
+                        <span id="line2"
+                            class="block w-5 h-0.5 bg-current transition-all duration-300 ease-in-out"></span>
+                        <span id="line3"
+                            class="block w-4 h-0.5 bg-current transition-all duration-300 ease-in-out"></span>
+                    </div>
                 </button>
             </div>
         </div>
@@ -152,24 +151,68 @@
     document.addEventListener('DOMContentLoaded', function() {
         const menuButton = document.getElementById('mobile-menu-button');
         const mobileMenu = document.getElementById('mobile-menu');
-        const hamburgerIcon = document.getElementById('hamburger-icon');
-        const closeIcon = document.getElementById('close-icon');
+        const line1 = document.getElementById('line1');
+        const line2 = document.getElementById('line2');
+        const line3 = document.getElementById('line3');
+        let isOpen = false;
 
         menuButton.addEventListener('click', function() {
+            isOpen = !isOpen;
+
+            // Toggle menu
             mobileMenu.classList.toggle('hidden');
-            hamburgerIcon.classList.toggle('hidden');
-            closeIcon.classList.toggle('hidden');
+
+            // Animate hamburger to X
+            if (isOpen) {
+                line1.style.transform = 'rotate(45deg) translateY(6px)';
+                line1.style.width = '24px';
+                line2.style.opacity = '0';
+                line2.style.transform = 'translateX(10px)';
+                line3.style.transform = 'rotate(-45deg) translateY(-6px)';
+                line3.style.width = '24px';
+            } else {
+                line1.style.transform = 'rotate(0) translateY(0)';
+                line1.style.width = '24px';
+                line2.style.opacity = '1';
+                line2.style.transform = 'translateX(0)';
+                line3.style.transform = 'rotate(0) translateY(0)';
+                line3.style.width = '16px';
+            }
         });
 
         // Close menu when clicking outside
         document.addEventListener('click', function(event) {
             const isClickInside = menuButton.contains(event.target) || mobileMenu.contains(event
-            .target);
+                .target);
             if (!isClickInside && !mobileMenu.classList.contains('hidden')) {
+                isOpen = false;
                 mobileMenu.classList.add('hidden');
-                hamburgerIcon.classList.remove('hidden');
-                closeIcon.classList.add('hidden');
+
+                // Reset hamburger animation
+                line1.style.transform = 'rotate(0) translateY(0)';
+                line1.style.width = '24px';
+                line2.style.opacity = '1';
+                line2.style.transform = 'translateX(0)';
+                line3.style.transform = 'rotate(0) translateY(0)';
+                line3.style.width = '16px';
             }
+        });
+
+        // Close menu when clicking on a link
+        const mobileLinks = mobileMenu.querySelectorAll('a');
+        mobileLinks.forEach(link => {
+            link.addEventListener('click', function() {
+                isOpen = false;
+                mobileMenu.classList.add('hidden');
+
+                // Reset hamburger animation
+                line1.style.transform = 'rotate(0) translateY(0)';
+                line1.style.width = '24px';
+                line2.style.opacity = '1';
+                line2.style.transform = 'translateX(0)';
+                line3.style.transform = 'rotate(0) translateY(0)';
+                line3.style.width = '16px';
+            });
         });
     });
 </script>
