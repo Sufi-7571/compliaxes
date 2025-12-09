@@ -99,9 +99,8 @@
             <!-- Mobile menu button -->
             <div class="lg:hidden">
                 <button type="button" id="mobile-menu-button"
-                    class="text-gray-700 hover:text-purple-600 focus:outline-none p-2 relative">
+                    class="text-black-800 hover:text-purple-800 focus:outline-none p-2 relative">
 
-                    <!-- Modern Hamburger with smooth animation -->
                     <div class="w-7 h-7 flex flex-col justify-center items-center gap-1.5 transition-all duration-300">
                         <span id="line1"
                             class="block w-6 h-0.5 bg-current transition-all duration-300 ease-in-out"></span>
@@ -116,32 +115,72 @@
     </div>
 
     <!-- Mobile Menu -->
-    <div id="mobile-menu" class="hidden lg:hidden bg-white/95 backdrop-blur-md border-t border-gray-100">
+    <div id="mobile-menu"
+        class="hidden lg:hidden bg-white/95 backdrop-blur-md border border-gray-100 
+           mt-4 mx-0 rounded-2xl shadow-md absolute w-full left-0 top-12 z-40">
+
         <div class="px-4 pt-2 pb-4 space-y-2">
+
             <a href="#solutions"
-                class="block px-4 py-3 text-gray-800 hover:bg-purple-50 hover:text-purple-600 rounded-lg transition font-medium">Solutions</a>
+                class="block px-4 py-3 text-black-800 hover:bg-purple-50 hover:text-purple-600 
+                   rounded-lg transition font-medium">
+                Solutions
+            </a>
+
             <a href="#company"
-                class="block px-4 py-3 text-gray-800 hover:bg-purple-50 hover:text-purple-600 rounded-lg transition font-medium">Company</a>
+                class="block px-4 py-3 text-black-800 hover:bg-purple-50 hover:text-purple-600 
+                   rounded-lg transition font-medium">
+                Company
+            </a>
+
             <a href="#partners"
-                class="block px-4 py-3 text-gray-800 hover:bg-purple-50 hover:text-purple-600 rounded-lg transition font-medium">Partners</a>
+                class="block px-4 py-3 text-black-800 hover:bg-purple-50 hover:text-purple-600 
+                   rounded-lg transition font-medium">
+                Partners
+            </a>
+
             <a href="#resources"
-                class="block px-4 py-3 text-gray-800 hover:bg-purple-50 hover:text-purple-600 rounded-lg transition font-medium">Resources</a>
+                class="block px-4 py-3 text-black-800 hover:bg-purple-50 hover:text-purple-600 
+                   rounded-lg transition font-medium">
+                Resources
+            </a>
+
             <a href="#pricing"
-                class="block px-4 py-3 text-gray-800 hover:bg-purple-50 hover:text-purple-600 rounded-lg transition font-medium">Pricing</a>
+                class="block px-4 py-3 text-black-800 hover:bg-purple-50 hover:text-purple-600 
+                   rounded-lg transition font-medium">
+                Pricing
+            </a>
 
             <div class="border-t border-gray-200 pt-4 space-y-2">
+
+                <!-- LOGIN -->
                 <a href="#login"
-                    class="block px-4 py-3 text-gray-800 hover:bg-purple-50 hover:text-purple-600 rounded-lg transition font-semibold">
+                    class="flex items-center justify-center gap-2 px-4 py-3 
+                       text-black-800 hover:bg-purple-50 hover:text-purple-600 
+                       rounded-lg transition font-semibold">
+                    <i class="fa-solid fa-right-to-bracket"></i>
                     LOGIN
                 </a>
+
+                <!-- BOOK A DEMO -->
                 <a href="#demo"
-                    class="block px-4 py-3 text-purple-600 hover:bg-purple-50 rounded-lg transition font-semibold">
+                    class="flex items-center justify-center gap-2 px-4 py-3 
+                       text-purple-600 hover:bg-purple-50 rounded-lg 
+                       transition font-semibold">
+                    <i class="fa-solid fa-video"></i>
                     BOOK A DEMO
                 </a>
+
+                <!-- START FREE TRIAL -->
                 <a href="#contact"
-                    class="block text-center bg-gradient-to-r from-pink-500 to-purple-600 text-white px-6 py-3 rounded-xl hover:from-pink-600 hover:to-purple-700 transition font-semibold shadow-lg">
+                    class="flex items-center justify-center gap-2 bg-gradient-to-r 
+                       from-pink-500 to-purple-600 text-white px-6 py-3 
+                       rounded-xl hover:from-pink-600 hover:to-purple-700 
+                       transition font-semibold shadow-lg">
+                    <i class="fa-solid fa-rocket"></i>
                     START FREE TRIAL
                 </a>
+
             </div>
         </div>
     </div>
