@@ -1,4 +1,7 @@
 <x-guest-layout>
+
+    <x-slot:title>CompliAxe - Login</x-slot:title>
+
     <div class="min-h-screen flex">
         <!-- Left Section -->
         <div class="w-full lg:w-1/2 flex items-center justify-center px-6 py-12 bg-white">
@@ -38,8 +41,10 @@
                     <div class="flex items-center justify-between">
                         <label for="remember_me" class="inline-flex items-center">
                             <input id="remember_me" type="checkbox"
-                                class="rounded border-gray-300 text-purple-600 shadow-sm focus:ring-purple-500"
+                                class="rounded border-gray-300 text-purple-600 shadow-sm 
+                                        focus:outline-none focus:ring-0 focus:ring-offset-0"
                                 name="remember">
+
                             <span class="ms-2 text-sm text-gray-600 font-medium">{{ __('Remember me') }}</span>
                         </label>
 
@@ -70,8 +75,8 @@
             <div class="max-w-lg">
                 <div id="lottie-animation" class="w-full"></div>
                 <div class="mt-8 text-center">
-                    <h3 class="text-2xl font-bold text-gray-800 mb-4">ADA & WCAG Compliant</h3>
-                    <p class="text-gray-600">Ensuring web accessibility for all users with comprehensive compliance
+                    <h2 class="text-2xl font-bold text-black-800 mb-4">ADA & WCAG Compliant</h2>
+                    <p class="text-black-800">Ensuring web accessibility for all users with comprehensive compliance
                         standards.</p>
                 </div>
             </div>
