@@ -12,7 +12,6 @@
                 </a>
             </div>
 
-            <!-- Desktop Navigation -->
             <div class="hidden lg:flex items-center space-x-8">
                 <div class="relative group">
                     <button class="text-black-800 hover:text-purple-800 transition font-medium flex items-center gap-1">
@@ -57,7 +56,6 @@
                 <a href="#pricing" class="text-black-800 hover:text-purple-800 transition font-medium">Pricing</a>
             </div>
 
-            <!-- Action Buttons -->
             <div class="hidden lg:flex items-center space-x-3">
                 <a href="#login"
                     class="text-gray-800 hover:text-purple-600 transition-all duration-300 font-semibold px-4 py-2 flex items-center gap-2 group">
@@ -153,7 +151,6 @@
 
             <div class="border-t border-gray-200 pt-4 space-y-2">
 
-                <!-- LOGIN -->
                 <a href="#login"
                     class="flex items-center justify-center gap-2 px-4 py-3 
                        text-black-800 hover:bg-purple-50 hover:text-purple-600 
@@ -162,7 +159,6 @@
                     LOGIN
                 </a>
 
-                <!-- BOOK A DEMO -->
                 <a href="#demo"
                     class="flex items-center justify-center gap-2 px-4 py-3 
                        text-purple-600 hover:bg-purple-50 rounded-lg 
@@ -171,7 +167,6 @@
                     BOOK A DEMO
                 </a>
 
-                <!-- START FREE TRIAL -->
                 <a href="#contact"
                     class="flex items-center justify-center gap-2 bg-gradient-to-r 
                        from-pink-500 to-purple-600 text-white px-6 py-3 
@@ -201,7 +196,6 @@
             // Toggle menu
             mobileMenu.classList.toggle('hidden');
 
-            // Animate hamburger to X
             if (isOpen) {
                 line1.style.transform = 'rotate(45deg) translateY(6px)';
                 line1.style.width = '24px';
@@ -219,7 +213,6 @@
             }
         });
 
-        // Close menu when clicking outside
         document.addEventListener('click', function(event) {
             const isClickInside = menuButton.contains(event.target) || mobileMenu.contains(event
                 .target);
