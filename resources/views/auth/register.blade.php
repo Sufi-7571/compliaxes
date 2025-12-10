@@ -1,7 +1,7 @@
 <x-guest-layout>
 
     <x-slot:title>CompliAxe - Register</x-slot:title>
-    
+
     <div class="min-h-screen flex">
         <!-- Left Section - Lottie Animation -->
         <div
@@ -89,7 +89,7 @@
             renderer: 'svg',
             loop: true,
             autoplay: true,
-            path: 'https://lottie.host/7b8c9d2e-4f5a-6b7c-8d9e-f0a1b2c3d4e5/P1Q2R3S4T5.json'
+            path: '{{ asset("lotties/welcome.json") }}'
         });
     </script>
 </x-guest-layout>
