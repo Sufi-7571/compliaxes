@@ -9,7 +9,7 @@
                     <h2
                         class="text-3xl font-bold bg-gradient-to-r from-pink-500 to-purple-600 bg-clip-text text-transparent">
                         Welcome Back</h2>
-                    <p class="text-gray-600 mt-2">Sign in to continue to CompliAxe</p>
+                    <p class="text-gray-600 mt-2">We are pleased to see you!</p>
                 </div>
 
                 <!-- Session Status -->
@@ -59,7 +59,7 @@
 
                 <div class="mt-6 text-center">
                     <p class="text-sm text-gray-600">Don't have an account? <a href="{{ route('register') }}"
-                            class="text-purple-600 hover:text-purple-800 font-semibold">Sign up</a></p>
+                            class="text-purple-600 hover:text-purple-800 font-semibold">Register Here</a></p>
                 </div>
             </div>
         </div>
