@@ -1,10 +1,10 @@
 <nav
     class="bg-white/90 backdrop-blur-md shadow-md fixed 
-            w-[calc(100%-2rem)] mx-4 rounded-lg    <!-- Mobile -->
-            lg:w-[calc(100%-20rem)] lg:mx-40 lg:rounded-2xl  <!-- Desktop -->
+            w-[calc(100%-2rem)] mx-4 rounded-lg    <!-- Mobile/Tablet -->
+            xl:w-[calc(100%-20rem)] xl:mx-40 xl:rounded-2xl  <!-- Desktop -->
             top-6 z-50 border border-gray-100">
 
-    <div class="max-w-8xl mx-auto px-4 sm:px-6 lg:px-10">
+    <div class="max-w-8xl mx-auto px-4 sm:px-6 xl:px-10">
         <div class="flex justify-between h-18 items-center">
             <div class="flex-shrink-0 flex items-center">
                 <a href="{{ route('home') }}">
@@ -12,7 +12,8 @@
                 </a>
             </div>
 
-            <div class="hidden lg:flex items-center space-x-8">
+            <!-- Desktop Navigation - Shows on XL screens and above -->
+            <div class="hidden xl:flex items-center space-x-8">
                 <div class="relative group">
                     <button class="text-black-800 hover:text-purple-800 transition font-medium flex items-center gap-1">
                         Solutions
@@ -56,7 +57,8 @@
                 <a href="#pricing" class="text-black-800 hover:text-purple-800 transition font-medium">Pricing</a>
             </div>
 
-            <div class="hidden lg:flex items-center space-x-3">
+            <!-- Desktop Action Buttons - Shows on XL screens and above -->
+            <div class="hidden xl:flex items-center space-x-3">
                 <a href="#login"
                     class="text-gray-800 hover:text-purple-600 transition-all duration-300 font-semibold px-4 py-2 flex items-center gap-2 group">
                     <svg class="w-5 h-5 transition-transform duration-300 group-hover:scale-110" fill="none"
@@ -94,8 +96,8 @@
                 </a>
             </div>
 
-            <!-- Mobile menu button -->
-            <div class="lg:hidden">
+            <!-- Mobile menu button - Shows on screens smaller than XL -->
+            <div class="xl:hidden">
                 <button type="button" id="mobile-menu-button"
                     class="text-black-800 hover:text-purple-800 focus:outline-none p-2 relative">
 
@@ -112,9 +114,9 @@
         </div>
     </div>
 
-    <!-- Mobile Menu -->
+    <!-- Mobile Menu - Shows on screens smaller than XL -->
     <div id="mobile-menu"
-        class="hidden lg:hidden bg-white/95 backdrop-blur-md border border-gray-100 
+        class="hidden xl:hidden bg-white/95 backdrop-blur-md border border-gray-100 
            mt-4 mx-0 rounded-2xl shadow-md absolute w-full left-0 top-12 z-40">
 
         <div class="px-4 pt-2 pb-4 space-y-2">
@@ -155,7 +157,10 @@
                     class="flex items-center justify-center gap-2 px-4 py-3 
                        text-black-800 hover:bg-purple-50 hover:text-purple-600 
                        rounded-lg transition font-semibold">
-                    <i class="fa-solid fa-right-to-bracket"></i>
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
+                    </svg>
                     LOGIN
                 </a>
 
@@ -163,7 +168,11 @@
                     class="flex items-center justify-center gap-2 px-4 py-3 
                        text-purple-600 hover:bg-purple-50 rounded-lg 
                        transition font-semibold">
-                    <i class="fa-solid fa-video"></i>
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z">
+                        </path>
+                    </svg>
                     BOOK A DEMO
                 </a>
 
@@ -172,7 +181,10 @@
                        from-pink-500 to-purple-600 text-white px-6 py-3 
                        rounded-xl hover:from-pink-600 hover:to-purple-700 
                        transition font-semibold shadow-lg">
-                    <i class="fa-solid fa-rocket"></i>
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+                    </svg>
                     START FREE TRIAL
                 </a>
 
