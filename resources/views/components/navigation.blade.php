@@ -59,7 +59,7 @@
 
             <!-- Desktop Action Buttons - Shows on XL screens and above -->
             <div class="hidden xl:flex items-center space-x-3">
-                <a href="#login"
+                <a href="{{ route('login') }}"
                     class="text-gray-800 hover:text-purple-600 transition-all duration-300 font-semibold px-4 py-2 flex items-center gap-2 group">
                     <svg class="w-5 h-5 transition-transform duration-300 group-hover:scale-110" fill="none"
                         stroke="currentColor" viewBox="0 0 24 24">

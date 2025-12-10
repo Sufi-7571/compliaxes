@@ -82,4 +82,19 @@ class User extends Authenticatable
         }
         return $this->websites()->count() < $this->subscriptionPlan->max_websites;
     }
+
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::created(function ($user) {
+            // Auto-assign Free plan to new users
+            $freePlan = \App\Models\SubscriptionPlan::where('name', 'Free')->first();
+            if ($freePlan) {
+                $user->subscription_plan_id = $freePlan->id;
+                $user->subscription_started_at = now();
+                $user->save();
+            }
+        });
+    }
 }
