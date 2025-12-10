@@ -173,7 +173,10 @@
     <section id="pricing" class="py-24 bg-gradient-to-b from-purple-50 to-white">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-16">
-                <h2 class="text-4xl md:text-5xl font-bold text-gray-900 mb-4">Plans Customized to Fit Your Needs</h2>
+                <h2 class="text-4xl md:text-5xl font-bold text-gray-900 mb-4">Plans <span
+                        class="bg-gradient-to-br from-pink-600 to-purple-800 bg-clip-text text-transparent">
+                        Customized
+                    </span> to Fit Your Needs</h2>
                 <p class="text-xl text-gray-600 max-w-2xl mx-auto">Choose the perfect plan for your business and start
                     your accessibility journey today</p>
             </div>
