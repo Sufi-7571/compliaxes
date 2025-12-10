@@ -74,7 +74,8 @@
                                 </div>
 
                                 <p class="text-xs text-gray-500 mb-4">Last scanned:
-                                    {{ $website->last_scanned_at->diffForHumans() }}</p>
+                                    {{ $website->last_scanned_at ? $website->last_scanned_at->diffForHumans() : 'Never' }}
+                                </p>
                             @else
                                 <div class="mb-4 text-center py-8 bg-gray-50 rounded">
                                     <p class="text-gray-500">No scans yet</p>

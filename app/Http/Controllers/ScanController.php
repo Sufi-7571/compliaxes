@@ -6,11 +6,13 @@ use App\Models\Website;
 use App\Models\Scan;
 use App\Jobs\ProcessWebsiteScan;
 use Illuminate\Http\Request;
-use Illuminate\Routing\Controller;
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
+use Illuminate\Routing\Controller as BaseController;
 
-
-class ScanController extends Controller
+class ScanController extends BaseController
 {
+    use AuthorizesRequests;
+
     public function __construct()
     {
         $this->middleware('auth');
@@ -26,9 +28,12 @@ class ScanController extends Controller
             ->first();
 
         if ($existingScan) {
+            \Log::info('Existing scan found', ['scan_id' => $existingScan->id, 'status' => $existingScan->status]);
             return redirect()->back()
-                ->with('error', 'A scan is already in progress for this website.');
+                ->with('error', 'A scan is already in progress for this website. Please wait for it to complete.');
         }
+
+        \Log::info('Creating new scan for website', ['website_id' => $website->id]);
 
         // Create new scan
         $scan = Scan::create([
@@ -37,11 +42,15 @@ class ScanController extends Controller
             'started_at' => now()
         ]);
 
+        \Log::info('Scan created', ['scan_id' => $scan->id]);
+
         // Dispatch job to process scan
         ProcessWebsiteScan::dispatch($scan);
 
+        \Log::info('Job dispatched', ['scan_id' => $scan->id]);
+
         return redirect()->back()
-            ->with('success', 'Scan started! This may take a few minutes.');
+            ->with('success', 'Scan started! This may take a few minutes. Refresh the page to see results.');
     }
 
     public function show(Scan $scan)
