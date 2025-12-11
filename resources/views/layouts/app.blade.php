@@ -28,6 +28,8 @@
         {{ $slot }}
     </main>
 
+    <x-book-demo-modal />
+
     <!-- Footer -->
     <x-footer />
 </body>

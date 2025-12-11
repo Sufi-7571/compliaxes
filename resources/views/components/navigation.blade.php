@@ -69,16 +69,16 @@
                     <span class="group-hover:translate-x-0.5 transition-transform duration-300">LOGIN</span>
                 </a>
 
-                <a href="#demo"
-                    class="text-purple-600 hover:text-purple-800 transition-all duration-300 font-semibold px-4 py-2 flex items-center gap-2 group">
-                    <svg class="w-5 h-5 transition-transform duration-300 group-hover:rotate-12" fill="none"
-                        stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z">
-                        </path>
-                    </svg>
-                    <span class="group-hover:translate-x-0.5 transition-transform duration-300">BOOK A DEMO</span>
-                </a>
+<!-- Desktop version (inside the xl:flex block) -->
+<button type="button" onclick="openDemoModal()"
+        class="text-purple-600 hover:text-purple-800 transition-all duration-300 font-semibold px-4 py-2 flex items-center gap-2 group cursor-pointer">
+    <svg class="w-5 h-5 transition-transform duration-300 group-hover:rotate-12" fill="none"
+         stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+              d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+    </svg>
+    <span class="group-hover:translate-x-0.5 transition-transform duration-300">BOOK A DEMO</span>
+</button>
 
                 <a href="{{ route('register') }}" target="_blank"
                     class="bg-gradient-to-r from-pink-500 to-purple-600 text-white px-6 py-2.5 rounded-xl hover:from-pink-600 hover:to-purple-700 transition-all duration-300 font-semibold flex items-center gap-2 shadow-lg hover:shadow-xl group">
