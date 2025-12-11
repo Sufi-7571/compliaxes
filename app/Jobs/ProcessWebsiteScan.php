@@ -3,7 +3,7 @@
 namespace App\Jobs;
 
 use App\Models\Scan;
-use App\Services\AccessibilityScanner;
+use App\Services\AxeCoreScanner;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
@@ -16,6 +16,7 @@ class ProcessWebsiteScan implements ShouldQueue
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
     public $scan;
+    public $timeout = 600; // 10 minutes timeout
 
     public function __construct(Scan $scan)
     {
@@ -25,27 +26,28 @@ class ProcessWebsiteScan implements ShouldQueue
     public function handle()
     {
         try {
-            Log::info('Starting scan', ['scan_id' => $this->scan->id]);
-
+            Log::info('Starting axe-core scan job', ['scan_id' => $this->scan->id]);
+            
             $this->scan->update(['status' => 'processing']);
-
-            // Run the scanner
-            $scanner = new AccessibilityScanner();
+            
+            // Use AxeCoreScanner instead
+            $scanner = new AxeCoreScanner();
             $scanner->scan($this->scan);
-
+            
             // Update scan status
             $this->scan->update([
                 'status' => 'completed',
                 'completed_at' => now()
             ]);
-
+            
             // Update website last scan info
             $this->scan->website->update([
                 'last_scan_score' => $this->scan->accessibility_score,
                 'last_scanned_at' => now()
             ]);
-
-            Log::info('Scan completed', ['scan_id' => $this->scan->id]);
+            
+            Log::info('Scan completed successfully', ['scan_id' => $this->scan->id]);
+            
         } catch (\Exception $e) {
             $this->scan->update(['status' => 'failed']);
             Log::error('Scan failed', [
@@ -55,14 +57,14 @@ class ProcessWebsiteScan implements ShouldQueue
             ]);
         }
     }
-
+    
     public function failed(\Throwable $exception)
     {
         Log::error('Job failed completely', [
             'scan_id' => $this->scan->id,
             'error' => $exception->getMessage()
         ]);
-
+        
         $this->scan->update(['status' => 'failed']);
     }
 }

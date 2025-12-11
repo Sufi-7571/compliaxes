@@ -244,25 +244,183 @@
     </section>
 
     <!-- Testimonials Section -->
-    <section id="testimonials" class="py-16 bg-gray-50">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <h2 class="text-4xl font-bold text-center mb-12">What Our Clients Say</h2>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                @foreach ($testimonials as $testimonial)
-                    <div class="bg-white p-6 rounded-lg shadow-md">
-                        <p class="text-gray-700 mb-4">"{{ $testimonial->testimonial_text }}"</p>
-                        <div class="flex items-center">
-                            <div>
-                                <p class="font-semibold">{{ $testimonial->client_name }}</p>
-                                <p class="text-sm text-gray-600">{{ $testimonial->client_position }},
-                                    {{ $testimonial->company_name }}</p>
+    <section id="testimonials" class="py-24 bg-gradient-to-b from-white to-purple-50 relative overflow-hidden">
+
+        <div class="absolute top-20 right-0 w-72 h-72 bg-pink-200 rounded-full blur-3xl opacity-20"></div>
+        <div class="absolute bottom-20 left-0 w-72 h-72 bg-purple-200 rounded-full blur-3xl opacity-20"></div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="text-center mb-16">
+                <div
+                    class="inline-block mb-4 px-4 py-2 bg-gradient-to-r from-pink-500 to-purple-600 text-white rounded-full text-sm font-semibold">
+                    Client Success Stories
+                </div>
+                <h2 class="text-4xl md:text-5xl font-bold text-gray-900 mb-4">What Our <span
+                        class="bg-gradient-to-br from-pink-600 to-purple-800 bg-clip-text text-transparent">
+                        Clients
+                    </span> Say</h2>
+                <p class="text-xl text-gray-600 max-w-2xl mx-auto">See how we've helped businesses achieve full
+                    accessibility compliance</p>
+            </div>
+
+            
+            <div class="relative max-w-4xl mx-auto">
+                <div class="overflow-hidden">
+                    <div id="testimonials-slider" class="flex transition-transform duration-500 ease-in-out">
+                        @foreach ($testimonials as $index => $testimonial)
+                            <div class="w-full flex-shrink-0 px-4">
+                                <div
+                                    class="group bg-white p-10 rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 border border-purple-100 relative">
+                                    
+                                    <div
+                                        class="absolute top-6 right-6 w-16 h-16 bg-gradient-to-br from-pink-500 to-purple-600 rounded-full flex items-center justify-center opacity-10 group-hover:opacity-20 transition-opacity">
+                                        <svg class="w-8 h-8 text-white" fill="currentColor" viewBox="0 0 24 24">
+                                            <path
+                                                d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z">
+                                            </path>
+                                        </svg>
+                                    </div>
+
+                                    <div class="mb-8">
+                                        
+                                        <div class="flex gap-1 mb-6">
+                                            @for ($i = 0; $i < 5; $i++)
+                                                <svg class="w-6 h-6 text-yellow-400" fill="currentColor"
+                                                    viewBox="0 0 20 20">
+                                                    <path
+                                                        d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z">
+                                                    </path>
+                                                </svg>
+                                            @endfor
+                                        </div>
+
+                                        <p class="text-gray-700 text-xl leading-relaxed italic">
+                                            "{{ $testimonial->testimonial_text }}"</p>
+                                    </div>
+
+                                    <div class="flex items-center gap-4 pt-6 border-t border-gray-100">
+                                        <!-- Avatar -->
+                                        <div
+                                            class="w-16 h-16 bg-gradient-to-br from-pink-500 to-purple-600 rounded-full flex items-center justify-center text-white font-bold text-2xl">
+                                            {{ substr($testimonial->client_name, 0, 1) }}
+                                        </div>
+
+                                        <div>
+                                            <p class="font-bold text-gray-900 text-xl">{{ $testimonial->client_name }}
+                                            </p>
+                                            <p class="text-sm text-gray-600">{{ $testimonial->client_position }}</p>
+                                            <p class="text-sm font-semibold text-purple-600">
+                                                {{ $testimonial->company_name }}</p>
+                                        </div>
+
+                                        <!-- Verified Badge -->
+                                        <div
+                                            class="ml-auto flex items-center gap-1 text-green-600 text-xs font-semibold">
+                                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                                                <path fill-rule="evenodd"
+                                                    d="M6.267 3.455a3.066 3.066 0 001.745-.723 3.066 3.066 0 013.976 0 3.066 3.066 0 001.745.723 3.066 3.066 0 012.812 2.812c.051.643.304 1.254.723 1.745a3.066 3.066 0 010 3.976 3.066 3.066 0 00-.723 1.745 3.066 3.066 0 01-2.812 2.812 3.066 3.066 0 00-1.745.723 3.066 3.066 0 01-3.976 0 3.066 3.066 0 00-1.745-.723 3.066 3.066 0 01-2.812-2.812 3.066 3.066 0 00-.723-1.745 3.066 3.066 0 010-3.976 3.066 3.066 0 00.723-1.745 3.066 3.066 0 012.812-2.812zm7.44 5.252a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                                                    clip-rule="evenodd"></path>
+                                            </svg>
+                                            Verified
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
-                        </div>
+                        @endforeach
                     </div>
-                @endforeach
+                </div>
+
+                
+                <button id="prev-btn"
+                    class="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-4 lg:-translate-x-16 w-14 h-14 bg-white rounded-full shadow-xl flex items-center justify-center text-purple-600 hover:bg-gradient-to-r hover:from-pink-500 hover:to-purple-600 hover:text-white transition-all duration-300 hover:scale-110 z-10">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7">
+                        </path>
+                    </svg>
+                </button>
+
+                <button id="next-btn"
+                    class="absolute right-0 top-1/2 -translate-y-1/2 translate-x-4 lg:translate-x-16 w-14 h-14 bg-white rounded-full shadow-xl flex items-center justify-center text-purple-600 hover:bg-gradient-to-r hover:from-pink-500 hover:to-purple-600 hover:text-white transition-all duration-300 hover:scale-110 z-10">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7">
+                        </path>
+                    </svg>
+                </button>
+
+                
+                <div class="flex justify-center gap-3 mt-10">
+                    @foreach ($testimonials as $index => $testimonial)
+                        <button
+                            class="slider-dot w-3 h-3 rounded-full transition-all duration-300 {{ $index === 0 ? 'bg-gradient-to-r from-pink-500 to-purple-600 w-8' : 'bg-gray-300 hover:bg-gray-400' }}"
+                            data-index="{{ $index }}"></button>
+                    @endforeach
+                </div>
+            </div>
+
+            <!-- CTA Banner -->
+            <div class="mt-16 bg-gradient-to-r from-pink-500 to-purple-600 rounded-2xl p-8 text-center shadow-2xl">
+                <h3 class="text-3xl font-bold text-white mb-4">Ready to Join Our Happy Clients?</h3>
+                <p class="text-white/90 text-lg mb-6">Start your accessibility journey today with a 14-day free trial
+                </p>
+                <a href="#contact"
+                    class="inline-flex items-center gap-2 bg-white text-purple-600 px-8 py-4 rounded-xl font-bold hover:bg-gray-100 transition-all duration-300 shadow-lg hover:shadow-xl hover:scale-105">
+                    Get Started Now
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
+                    </svg>
+                </a>
             </div>
         </div>
     </section>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const slider = document.getElementById('testimonials-slider');
+            const prevBtn = document.getElementById('prev-btn');
+            const nextBtn = document.getElementById('next-btn');
+            const dots = document.querySelectorAll('.slider-dot');
+            const totalSlides = {{ count($testimonials) }};
+            let currentSlide = 0;
+
+            function updateSlider() {
+                slider.style.transform = `translateX(-${currentSlide * 100}%)`;
+
+                dots.forEach((dot, index) => {
+                    if (index === currentSlide) {
+                        dot.classList.add('bg-gradient-to-r', 'from-pink-500', 'to-purple-600', 'w-8');
+                        dot.classList.remove('bg-gray-300', 'w-3');
+                    } else {
+                        dot.classList.remove('bg-gradient-to-r', 'from-pink-500', 'to-purple-600', 'w-8');
+                        dot.classList.add('bg-gray-300', 'w-3');
+                    }
+                });
+            }
+
+            prevBtn.addEventListener('click', () => {
+                currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
+                updateSlider();
+            });
+
+            nextBtn.addEventListener('click', () => {
+                currentSlide = (currentSlide + 1) % totalSlides;
+                updateSlider();
+            });
+
+            dots.forEach(dot => {
+                dot.addEventListener('click', () => {
+                    currentSlide = parseInt(dot.dataset.index);
+                    updateSlider();
+                });
+            });
+
+            // Auto-slide
+            setInterval(() => {
+                currentSlide = (currentSlide + 1) % totalSlides;
+                updateSlider();
+            }, 5000);
+        });
+    </script>
 
     <!-- Contact Section -->
     <section id="contact" class="py-16 bg-white">
