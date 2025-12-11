@@ -80,7 +80,7 @@
                     <span class="group-hover:translate-x-0.5 transition-transform duration-300">BOOK A DEMO</span>
                 </a>
 
-                <a href="#contact"
+                <a href="{{ route('register') }}" target="_blank"
                     class="bg-gradient-to-r from-pink-500 to-purple-600 text-white px-6 py-2.5 rounded-xl hover:from-pink-600 hover:to-purple-700 transition-all duration-300 font-semibold flex items-center gap-2 shadow-lg hover:shadow-xl group">
                     <svg class="w-5 h-5 transition-transform duration-300 group-hover:scale-110" fill="none"
                         stroke="currentColor" viewBox="0 0 24 24">

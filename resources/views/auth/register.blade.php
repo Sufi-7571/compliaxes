@@ -9,9 +9,16 @@
             <div class="max-w-lg">
                 <div id="lottie-animation" class="w-full"></div>
                 <div class="mt-8 text-center">
-                    <h3 class="text-2xl font-bold text-gray-800 mb-4">Join CompliAxe Today</h3>
-                    <p class="text-gray-600">Start your journey towards complete web accessibility compliance with our
-                        comprehensive solutions.</p>
+                    <h3 class="text-2xl font-bold text-gray-800 mb-4">Join <span
+                            class="bg-gradient-to-br from-pink-600 to-purple-800 bg-clip-text text-transparent text-3xl">
+                            <i>CompliAxe</i>
+                        </span> Today</h3>
+                    <p class="text-black-800 text-xl">Start your journey towards complete web accessibility compliance
+                        with our
+                        comprehensive solutions. <br> Get free <span
+                            class="bg-gradient-to-br from-pink-600 to-purple-800 bg-clip-text text-transparent">
+                            <i><b>14 Days</b></i>
+                        </span> Trails.</p>
                 </div>
             </div>
         </div>
@@ -89,7 +96,7 @@
             renderer: 'svg',
             loop: true,
             autoplay: true,
-            path: '{{ asset("lotties/welcome.json") }}'
+            path: '{{ asset('lotties/welcome.json') }}'
         });
     </script>
 </x-guest-layout>
