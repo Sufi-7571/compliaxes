@@ -41,43 +41,47 @@ class AxeCoreScanner
 
     protected function crawlWebsite($baseUrl)
     {
-        $this->crawledUrls[] = $baseUrl;
+        // $this->crawledUrls[] = $baseUrl;
 
-        try {
-            // Get HTML content
-            $html = Browsershot::url($baseUrl)
-                ->setNodeBinary('/usr/local/bin/node')
-                ->setNpmBinary('/usr/local/bin/npm')
-                ->timeout(120)
-                ->bodyHtml();
+        // try {
+        //     // Get HTML content
+        //     $html = Browsershot::url($baseUrl)
+        //         ->setNodeBinary('/usr/local/bin/node')
+        //         ->setNpmBinary('/usr/local/bin/npm')
+        //         ->timeout(120)
+        //         ->bodyHtml();
 
-            // Parse links (simple crawling)
-            preg_match_all('/<a[^>]+href=["\'](.*?)["\']/', $html, $matches);
+        //     // Parse links (simple crawling)
+        //     preg_match_all('/<a[^>]+href=["\'](.*?)["\']/', $html, $matches);
 
-            if (!empty($matches[1])) {
-                foreach ($matches[1] as $href) {
-                    if (count($this->crawledUrls) >= $this->maxPages) {
-                        break;
-                    }
+        //     if (!empty($matches[1])) {
+        //         foreach ($matches[1] as $href) {
+        //             if (count($this->crawledUrls) >= $this->maxPages) {
+        //                 break;
+        //             }
 
-                    $absoluteUrl = $this->makeAbsoluteUrl($href, $baseUrl);
+        //             $absoluteUrl = $this->makeAbsoluteUrl($href, $baseUrl);
 
-                    if (
-                        $absoluteUrl &&
-                        $this->isSameDomain($absoluteUrl, $baseUrl) &&
-                        !in_array($absoluteUrl, $this->crawledUrls) &&
-                        !$this->isAsset($absoluteUrl)
-                    ) {
+        //             if (
+        //                 $absoluteUrl &&
+        //                 $this->isSameDomain($absoluteUrl, $baseUrl) &&
+        //                 !in_array($absoluteUrl, $this->crawledUrls) &&
+        //                 !$this->isAsset($absoluteUrl)
+        //             ) {
 
-                        $this->crawledUrls[] = $absoluteUrl;
-                    }
-                }
-            }
-        } catch (\Exception $e) {
-            Log::error("Crawl error: " . $e->getMessage());
-        }
+        //                 $this->crawledUrls[] = $absoluteUrl;
+        //             }
+        //         }
+        //     }
+        // } catch (\Exception $e) {
+        //     Log::error("Crawl error: " . $e->getMessage());
+        // }
 
-        return array_slice($this->crawledUrls, 0, $this->maxPages);
+        // return array_slice($this->crawledUrls, 0, $this->maxPages);
+
+        $this->crawledUrls = [$baseUrl];
+    
+        return $this->crawledUrls;
     }
 
     protected function scanPageWithAxe($url)
@@ -85,70 +89,38 @@ class AxeCoreScanner
         try {
             Log::info('Scanning with axe-core', ['url' => $url]);
 
-            // Create a temporary file for axe results
-            $tempFile = storage_path('app/temp/axe-results-' . md5($url) . '.json');
+            // Create temp file for results
+            $tempFile = storage_path('app/temp/axe-results-' . md5($url . time()) . '.json');
 
             // Ensure temp directory exists
             if (!file_exists(storage_path('app/temp'))) {
                 mkdir(storage_path('app/temp'), 0755, true);
             }
 
-            // Run axe-core analysis
-            $script = "
-                const puppeteer = require('puppeteer');
-                const axe = require('axe-core');
-                const fs = require('fs');
-                
-                (async () => {
-                    const browser = await puppeteer.launch({
-                        headless: true,
-                        args: ['--no-sandbox', '--disable-setuid-sandbox']
-                    });
-                    
-                    const page = await browser.newPage();
-                    
-                    try {
-                        await page.goto('{$url}', { 
-                            waitUntil: 'networkidle2',
-                            timeout: 60000 
-                        });
-                        
-                        // Inject axe-core
-                        await page.addScriptTag({ path: './node_modules/axe-core/axe.min.js' });
-                        
-                        // Run axe
-                        const results = await page.evaluate(() => {
-                            return new Promise((resolve) => {
-                                axe.run((err, results) => {
-                                    if (err) throw err;
-                                    resolve(results);
-                                });
-                            });
-                        });
-                        
-                        // Save results
-                        fs.writeFileSync('{$tempFile}', JSON.stringify(results, null, 2));
-                        
-                    } catch (error) {
-                        console.error('Error:', error);
-                        fs.writeFileSync('{$tempFile}', JSON.stringify({ error: error.message }, null, 2));
-                    }
-                    
-                    await browser.close();
-                })();
-            ";
+            // Path to the scanner script
+            $scriptPath = base_path('resources/scripts/axe-scanner.js');
 
-            // Save script to temp file
-            $scriptFile = storage_path('app/temp/scan-script.js');
-            file_put_contents($scriptFile, $script);
+            if (!file_exists($scriptPath)) {
+                Log::error('Scanner script not found', ['path' => $scriptPath]);
+                return;
+            }
 
-            // Execute Node script
-            $output = shell_exec("node {$scriptFile} 2>&1");
+            // Execute the Node.js script
+            $command = "node " . escapeshellarg($scriptPath) . " " . escapeshellarg($url) . " " . escapeshellarg($tempFile) . " 2>&1";
 
-            Log::info('Axe script output', ['output' => $output]);
+            Log::info('Executing command', ['command' => $command]);
 
-            // Wait for results file
-            $maxWait = 60; // 60 seconds max wait
+            $output = [];
+            $returnCode = 0;
+            exec($command, $output, $returnCode);
+
+            Log::info('Command executed', [
+                'return_code' => $returnCode,
+                'output' => implode("\n", $output)
+            ]);
+
+            // Wait for results file (max 90 seconds)
+            $maxWait = 90;
             $waited = 0;
             while (!file_exists($tempFile) && $waited < $maxWait) {
                 sleep(1);
@@ -156,27 +128,38 @@ class AxeCoreScanner
             }
 
             if (file_exists($tempFile)) {
-                $results = json_decode(file_get_contents($tempFile), true);
+                $resultsJson = file_get_contents($tempFile);
+                $results = json_decode($resultsJson, true);
 
-                if (isset($results['violations']) && is_array($results['violations'])) {
+                Log::info('Results loaded', [
+                    'file_size' => strlen($resultsJson),
+                    'has_violations' => isset($results['violations'])
+                ]);
+
+                if (isset($results['error'])) {
+                    Log::error('Axe scan error in results', ['error' => $results['error'], 'url' => $url]);
+                } elseif (isset($results['violations']) && is_array($results['violations'])) {
+                    Log::info('Processing violations', ['count' => count($results['violations']), 'url' => $url]);
                     $this->processAxeResults($results['violations'], $url);
-                    Log::info('Violations found', ['count' => count($results['violations'])]);
                 } else {
-                    Log::warning('No violations in results', ['results' => $results]);
+                    Log::warning('No violations found', ['url' => $url, 'results_keys' => array_keys($results)]);
                 }
 
                 // Clean up
                 unlink($tempFile);
             } else {
-                Log::error('Axe results file not created', ['url' => $url]);
-            }
-
-            // Clean up script file
-            if (file_exists($scriptFile)) {
-                unlink($scriptFile);
+                Log::error('Results file was not created', [
+                    'url' => $url,
+                    'temp_file' => $tempFile,
+                    'waited' => $waited
+                ]);
             }
         } catch (\Exception $e) {
-            Log::error('Axe scan error', ['url' => $url, 'error' => $e->getMessage(), 'trace' => $e->getTraceAsString()]);
+            Log::error('Axe scan exception', [
+                'url' => $url,
+                'error' => $e->getMessage(),
+                'trace' => $e->getTraceAsString()
+            ]);
         }
     }
 

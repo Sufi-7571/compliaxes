@@ -263,7 +263,7 @@
                     accessibility compliance</p>
             </div>
 
-            
+
             <div class="relative max-w-4xl mx-auto">
                 <div class="overflow-hidden">
                     <div id="testimonials-slider" class="flex transition-transform duration-500 ease-in-out">
@@ -271,7 +271,7 @@
                             <div class="w-full flex-shrink-0 px-4">
                                 <div
                                     class="group bg-white p-10 rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 border border-purple-100 relative">
-                                    
+
                                     <div
                                         class="absolute top-6 right-6 w-16 h-16 bg-gradient-to-br from-pink-500 to-purple-600 rounded-full flex items-center justify-center opacity-10 group-hover:opacity-20 transition-opacity">
                                         <svg class="w-8 h-8 text-white" fill="currentColor" viewBox="0 0 24 24">
@@ -282,7 +282,7 @@
                                     </div>
 
                                     <div class="mb-8">
-                                        
+
                                         <div class="flex gap-1 mb-6">
                                             @for ($i = 0; $i < 5; $i++)
                                                 <svg class="w-6 h-6 text-yellow-400" fill="currentColor"
@@ -330,7 +330,7 @@
                     </div>
                 </div>
 
-                
+
                 <button id="prev-btn"
                     class="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-4 lg:-translate-x-16 w-14 h-14 bg-white rounded-full shadow-xl flex items-center justify-center text-purple-600 hover:bg-gradient-to-r hover:from-pink-500 hover:to-purple-600 hover:text-white transition-all duration-300 hover:scale-110 z-10">
                     <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -347,7 +347,7 @@
                     </svg>
                 </button>
 
-                
+
                 <div class="flex justify-center gap-3 mt-10">
                     @foreach ($testimonials as $index => $testimonial)
                         <button
@@ -491,6 +491,89 @@
                     class="w-full bg-gradient-to-r from-pink-500 to-purple-600 text-white py-3 rounded-lg font-semibold hover:from-pink-600 hover:to-purple-700 transition">Schedule
                     a Demo</button>
             </form>
+        </div>
+    </section>
+
+    <!-- Get Audit Section -->
+    <section class="py-24 bg-gradient-to-br from-purple-600 via-pink-500 to-purple-700 relative overflow-hidden">
+
+        <div class="absolute inset-0 opacity-10">
+            <div class="absolute top-10 left-20 w-64 h-64 bg-white rounded-full blur-3xl"></div>
+            <div class="absolute bottom-10 right-20 w-96 h-96 bg-pink-300 rounded-full blur-3xl"></div>
+            <div
+                class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-80 h-80 bg-purple-300 rounded-full blur-3xl">
+            </div>
+        </div>
+
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="text-center mb-12">
+                <div
+                    class="inline-block mb-4 px-4 py-2 bg-white/20 backdrop-blur-sm rounded-full text-sm font-semibold text-white">
+                    Free Accessibility Audit
+                </div>
+                <h2 class="text-4xl md:text-5xl font-extrabold text-white mb-6">
+                    Is Your Website <span
+                        class="bg-gradient-to-r from-yellow-200 to-pink-200 bg-clip-text text-transparent">ADA
+                        Compliant?</span>
+                </h2>
+                <p class="text-xl text-white/90 max-w-2xl mx-auto">Get a comprehensive accessibility audit report in
+                    minutes. Enter your website URL below to discover compliance issues and recommendations.</p>
+            </div>
+
+            <!-- Audit Form -->
+            <div class="bg-white rounded-2xl shadow-2xl p-2 md:p-2">
+                <form action="" method="POST" class="flex gap-4 items-center">
+                    @csrf
+
+                    <div class="flex-1 relative">
+                        <div class="absolute inset-y-0 left-0 pl-5 flex items-center pointer-events-none">
+                            <svg class="w-6 h-6 text-gray-400" fill="none" stroke="currentColor"
+                                viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9
+                      c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9
+                      m-9 9a9 9 0 019-9"></path>
+                            </svg>
+                        </div>
+
+                        <input type="url" id="website_url" name="website_url"
+                            placeholder="https://www.yourwebsite.com" required
+                            class="w-full pl-14 pr-4 py-5 text-lg border-2 border-black-700 rounded-2xl 
+                   focus:border-purple-500 focus:ring-100 focus:ring-purple-100 
+                   transition-all duration-300 outline-none">
+                    </div>
+
+                    <button type="submit"
+                        class="bg-gradient-to-r from-pink-500 to-purple-600 text-white font-bold 
+               px-8 py-5 rounded-2xl whitespace-nowrap shadow-xl 
+               hover:from-pink-600 hover:to-purple-700 
+               transition-all duration-300 hover:shadow-2xl hover:scale-105 flex items-center gap-3">
+                        <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2
+                  0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0
+                  012-2h2a2 2 0 012 2m-6 9l2 2 4-4"></path>
+                        </svg>
+                        Get Free Audit
+                    </button>
+                </form>
+
+
+            </div>
+
+            <!-- Stats -->
+            <div class="mt-12 grid grid-cols-1 md:grid-cols-3 gap-6 text-center text-white">
+                <div>
+                    <p class="text-5xl font-extrabold mb-2">10,000+</p>
+                    <p class="text-lg text-white/90">Websites Audited</p>
+                </div>
+                <div>
+                    <p class="text-5xl font-extrabold mb-2">98%</p>
+                    <p class="text-lg text-white/90">Compliance Rate</p>
+                </div>
+                <div>
+                    <p class="text-5xl font-extrabold mb-2">24/7</p>
+                    <p class="text-lg text-white/90">Expert Support</p>
+                </div>
+            </div>
         </div>
     </section>
 </x-app-layout>

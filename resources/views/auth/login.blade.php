@@ -57,9 +57,13 @@
                     </div>
 
                     <x-primary-button
-                        class="w-full justify-center bg-gradient-to-r from-pink-500 to-purple-600 hover:from-pink-600 hover:to-purple-700 text-white font-semibold py-3 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300">
+                        class="w-full justify-center bg-gradient-to-r from-pink-500 to-purple-600 
+                                hover:from-pink-600 hover:to-purple-700 text-white font-semibold 
+                                py-3 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300
+                                focus:outline-none focus:ring-0 active:outline-none active:ring-0">
                         {{ __('Log in') }}
                     </x-primary-button>
+
                 </form>
 
                 <div class="mt-6 text-center">
