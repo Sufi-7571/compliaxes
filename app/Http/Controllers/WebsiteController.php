@@ -49,6 +49,43 @@ class WebsiteController extends BaseController
             'url' => 'required|url|max:255'
         ]);
 
+        // Normalize URL
+        $url = $validated['url'];
+
+        // Add https:// if no scheme provided
+        if (!preg_match("~^(?:f|ht)tps?://~i", $url)) {
+            $url = "https://" . $url;
+        }
+
+        // Validate if URL is accessible
+        try {
+            \Log::info('Validating URL', ['url' => $url]);
+
+            $response = \Illuminate\Support\Facades\Http::timeout(15)
+                ->withoutVerifying() // Allow self-signed certificates for testing
+                ->get($url);
+
+            \Log::info('URL validation response', ['status' => $response->status()]);
+
+            if ($response->status() >= 400 && $response->status() < 600) {
+                return redirect()->back()
+                    ->withInput()
+                    ->with('error', 'Unable to access the website. The site returned HTTP ' . $response->status() . '. Please verify the URL.');
+            }
+        } catch (\Illuminate\Http\Client\ConnectionException $e) {
+            \Log::error('Connection error during URL validation', ['url' => $url, 'error' => $e->getMessage()]);
+            return redirect()->back()
+                ->withInput()
+                ->with('error', 'Unable to connect to the website. Please check if the URL is correct and accessible.');
+        } catch (\Exception $e) {
+            \Log::error('Error during URL validation', ['url' => $url, 'error' => $e->getMessage()]);
+            return redirect()->back()
+                ->withInput()
+                ->with('error', 'An error occurred while validating the URL: ' . $e->getMessage());
+        }
+
+        // Store with validated URL
+        $validated['url'] = $url;
         $validated['user_id'] = $user->id;
 
         Website::create($validated);
