@@ -85,83 +85,85 @@ class AxeCoreScanner
     }
 
     protected function scanPageWithAxe($url)
-    {
-        try {
-            Log::info('Scanning with axe-core', ['url' => $url]);
-
-            // Create temp file for results
-            $tempFile = storage_path('app/temp/axe-results-' . md5($url . time()) . '.json');
-
-            // Ensure temp directory exists
-            if (!file_exists(storage_path('app/temp'))) {
-                mkdir(storage_path('app/temp'), 0755, true);
-            }
-
-            // Path to the scanner script
-            $scriptPath = base_path('resources/scripts/axe-scanner.js');
-
-            if (!file_exists($scriptPath)) {
-                Log::error('Scanner script not found', ['path' => $scriptPath]);
-                return;
-            }
-
-            // Execute the Node.js script
-            $command = "node " . escapeshellarg($scriptPath) . " " . escapeshellarg($url) . " " . escapeshellarg($tempFile) . " 2>&1";
-
-            Log::info('Executing command', ['command' => $command]);
-
-            $output = [];
-            $returnCode = 0;
-            exec($command, $output, $returnCode);
-
-            Log::info('Command executed', [
-                'return_code' => $returnCode,
-                'output' => implode("\n", $output)
+{
+    try {
+        Log::info('Scanning with axe-core', ['url' => $url]);
+        
+        // Create temp file for results
+        $tempFile = storage_path('app/temp/axe-results-' . md5($url . time()) . '.json');
+        
+        // Ensure temp directory exists
+        if (!file_exists(storage_path('app/temp'))) {
+            mkdir(storage_path('app/temp'), 0755, true);
+        }
+        
+        // Path to the scanner script - UPDATED TO .cjs
+        $scriptPath = base_path('resources/scripts/axe-scanner.cjs');
+        
+        if (!file_exists($scriptPath)) {
+            Log::error('Scanner script not found', ['path' => $scriptPath]);
+            return;
+        }
+        
+        // Execute the Node.js script
+        $command = "node " . escapeshellarg($scriptPath) . " " . escapeshellarg($url) . " " . escapeshellarg($tempFile) . " 2>&1";
+        
+        Log::info('Executing command', ['command' => $command]);
+        
+        $output = [];
+        $returnCode = 0;
+        exec($command, $output, $returnCode);
+        
+        Log::info('Command executed', [
+            'return_code' => $returnCode,
+            'output' => implode("\n", $output)
+        ]);
+        
+        // Wait for results file (max 90 seconds)
+        $maxWait = 90;
+        $waited = 0;
+        while (!file_exists($tempFile) && $waited < $maxWait) {
+            sleep(1);
+            $waited++;
+        }
+        
+        if (file_exists($tempFile)) {
+            $resultsJson = file_get_contents($tempFile);
+            $results = json_decode($resultsJson, true);
+            
+            Log::info('Results loaded', [
+                'file_size' => strlen($resultsJson),
+                'has_violations' => isset($results['violations']),
+                'violation_count' => isset($results['violations']) ? count($results['violations']) : 0
             ]);
-
-            // Wait for results file (max 90 seconds)
-            $maxWait = 90;
-            $waited = 0;
-            while (!file_exists($tempFile) && $waited < $maxWait) {
-                sleep(1);
-                $waited++;
-            }
-
-            if (file_exists($tempFile)) {
-                $resultsJson = file_get_contents($tempFile);
-                $results = json_decode($resultsJson, true);
-
-                Log::info('Results loaded', [
-                    'file_size' => strlen($resultsJson),
-                    'has_violations' => isset($results['violations'])
-                ]);
-
-                if (isset($results['error'])) {
-                    Log::error('Axe scan error in results', ['error' => $results['error'], 'url' => $url]);
-                } elseif (isset($results['violations']) && is_array($results['violations'])) {
-                    Log::info('Processing violations', ['count' => count($results['violations']), 'url' => $url]);
-                    $this->processAxeResults($results['violations'], $url);
-                } else {
-                    Log::warning('No violations found', ['url' => $url, 'results_keys' => array_keys($results)]);
-                }
-
-                // Clean up
-                unlink($tempFile);
+            
+            if (isset($results['error'])) {
+                Log::error('Axe scan error in results', ['error' => $results['error'], 'url' => $url]);
+            } elseif (isset($results['violations']) && is_array($results['violations'])) {
+                Log::info('Processing violations', ['count' => count($results['violations']), 'url' => $url]);
+                $this->processAxeResults($results['violations'], $url);
             } else {
-                Log::error('Results file was not created', [
-                    'url' => $url,
-                    'temp_file' => $tempFile,
-                    'waited' => $waited
-                ]);
+                Log::warning('No violations found', ['url' => $url]);
             }
-        } catch (\Exception $e) {
-            Log::error('Axe scan exception', [
+            
+            // Clean up
+            unlink($tempFile);
+        } else {
+            Log::error('Results file was not created', [
                 'url' => $url,
-                'error' => $e->getMessage(),
-                'trace' => $e->getTraceAsString()
+                'temp_file' => $tempFile,
+                'waited' => $waited
             ]);
         }
+        
+    } catch (\Exception $e) {
+        Log::error('Axe scan exception', [
+            'url' => $url,
+            'error' => $e->getMessage(),
+            'trace' => $e->getTraceAsString()
+        ]);
     }
+}
 
     protected function processAxeResults($violations, $url)
     {

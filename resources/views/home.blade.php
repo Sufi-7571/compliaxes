@@ -25,21 +25,20 @@
                     Expert-driven. AI-powered. Effortlessly compliant.
                 </p>
                 <div class="flex flex-col sm:flex-row justify-center gap-4 sm:space-x-4">
-                    <a href="#contact"
-                        class="group bg-white text-purple-600 px-8 py-4 rounded-xl font-bold text-lg hover:bg-gray-50 transition-all duration-300 shadow-2xl hover:shadow-3xl hover:scale-105 flex items-center justify-center gap-2">
+                    <button type="button" onclick="openDemoModal()"
+                        class="group bg-white text-purple-600 px-8 py-4 rounded-xl font-bold text-lg hover:bg-gray-50 transition-all duration-300 shadow-2xl hover:shadow-3xl hover:scale-105 flex items-center justify-center gap-2 cursor-pointer">
                         <svg class="w-6 h-6 transition-transform duration-300 group-hover:rotate-12" fill="none"
                             stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z">
-                            </path>
+                                d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z" />
                         </svg>
                         Book a Demo
                         <svg class="w-5 h-5 transition-transform duration-300 group-hover:translate-x-1" fill="none"
                             stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
+                                d="M17 8l4 4m0 0l-4 4m4-4H3" />
                         </svg>
-                    </a>
+                    </button>
                     <a href="{{ route('register') }}" target="_blank"
                         class="group bg-white/10 backdrop-blur-md border-2 border-white/50 px-8 py-4 rounded-xl font-bold text-lg hover:bg-white hover:text-purple-600 transition-all duration-300 shadow-xl hover:shadow-2xl hover:scale-105 flex items-center justify-center gap-2">
                         <svg class="w-6 h-6 transition-transform duration-300 group-hover:scale-110" fill="none"
@@ -422,7 +421,7 @@
         });
     </script>
 
-    <!-- Contact Section -->
+    {{-- <!-- Contact Section -->
     <section id="contact" class="py-16 bg-white">
         <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
             <h2 class="text-4xl font-bold text-center mb-12">Talk to an Accessibility Expert</h2>
@@ -492,7 +491,7 @@
                     a Demo</button>
             </form>
         </div>
-    </section>
+    </section> --}}
 
     <!-- Get Audit Section -->
     <section class="py-24 bg-gradient-to-br from-purple-600 via-pink-500 to-purple-700 relative overflow-hidden">

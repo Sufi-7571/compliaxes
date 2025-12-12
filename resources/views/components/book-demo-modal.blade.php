@@ -34,19 +34,22 @@
 
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
                     <div>
-                        <label class="block text-sm font-bold text-gray-900 mb-2">First Name *</label>
+                        <label class="block text-sm font-bold text-gray-900 mb-2">First Name <span
+                                class="text-red-500">*</span></label>
                         <input type="text" name="first_name" required placeholder="John"
                             class="w-full px-4 py-3.5 rounded-xl border-2 border-gray-200 focus:border-purple-500 focus:ring-4 focus:ring-purple-100 transition-all outline-none">
                     </div>
                     <div>
-                        <label class="block text-sm font-bold text-gray-900 mb-2">Last Name *</label>
+                        <label class="block text-sm font-bold text-gray-900 mb-2">Last Name <span
+                                class="text-red-500">*</span></label>
                         <input type="text" name="last_name" required placeholder="Doe"
                             class="w-full px-4 py-3.5 rounded-xl border-2 border-gray-200 focus:border-purple-500 focus:ring-4 focus:ring-purple-100 transition-all outline-none">
                     </div>
                 </div>
 
                 <div class="mt-5">
-                    <label class="block text-sm font-bold text-gray-900 mb-2">Work Email *</label>
+                    <label class="block text-sm font-bold text-gray-900 mb-2">Work Email <span
+                            class="text-red-500">*</span></label>
                     <div class="relative">
                         <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
                             <svg class="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -61,7 +64,8 @@
                 </div>
 
                 <div class="mt-5">
-                    <label class="block text-sm font-bold text-gray-900 mb-2">Company Name *</label>
+                    <label class="block text-sm font-bold text-gray-900 mb-2">Company Name <span
+                            class="text-red-500">*</span></label>
                     <div class="relative">
                         <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
                             <svg class="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -77,29 +81,49 @@
 
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-5 mt-5">
                     <div>
-                        <label class="block text-sm font-bold text-gray-900 mb-2">Company Size *</label>
-                        <select name="company_size" required
-                            class="w-full px-4 py-3.5 rounded-xl border-2 border-gray-200 focus:border-purple-500 focus:ring-4 focus:ring-purple-100 transition-all outline-none appearance-none bg-white cursor-pointer">
-                            <option value="">Select size</option>
-                            <option>1-10 employees</option>
-                            <option>11-50 employees</option>
-                            <option>51-200 employees</option>
-                            <option>201-500 employees</option>
-                            <option>500+ employees</option>
-                        </select>
+                        <label class="block text-sm font-bold text-gray-900 mb-2">Company Size <span
+                                class="text-red-500">*</span></label>
+                        <div class="relative">
+                            <select name="company_size" required
+                                class="w-full px-4 py-3.5 rounded-xl border-2 border-gray-200 focus:border-purple-500 focus:ring-4 focus:ring-purple-100 transition-all outline-none appearance-none bg-white cursor-pointer pr-10">
+                                <option value="">Select size</option>
+                                <option>1-10 employees</option>
+                                <option>11-50 employees</option>
+                                <option>51-200 employees</option>
+                                <option>201-500 employees</option>
+                                <option>500+ employees</option>
+                            </select>
+                            <div class="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none">
+                                <svg class="w-5 h-5 text-purple-600" fill="none" stroke="currentColor"
+                                    viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M19 9l-7 7-7-7"></path>
+                                </svg>
+                            </div>
+                        </div>
                     </div>
                     <div>
-                        <label class="block text-sm font-bold text-gray-900 mb-2">Your Role *</label>
-                        <select name="role" required
-                            class="w-full px-4 py-3.5 rounded-xl border-2 border-gray-200 focus:border-purple-500 focus:ring-4 focus:ring-purple-100 transition-all outline-none appearance-none bg-white cursor-pointer">
-                            <option value="">Select role</option>
-                            <option>Compliance Officer</option>
-                            <option>Legal Counsel</option>
-                            <option>CEO / Founder</option>
-                            <option>Operations Manager</option>
-                            <option>IT Manager</option>
-                            <option>Other</option>
-                        </select>
+                        <label class="block text-sm font-bold text-gray-900 mb-2">Your Role <span
+                                class="text-red-500">*</span></label>
+                        <div class="relative">
+                            <select name="role" required
+                                class="w-full px-4 py-3.5 rounded-xl border-2 border-gray-200 focus:border-purple-500 focus:ring-4 focus:ring-purple-100 transition-all outline-none appearance-none bg-white cursor-pointer pr-10">
+                                <option value="">Select role</option>
+                                <option>Compliance Officer</option>
+                                <option>Legal Counsel</option>
+                                <option>CEO / Founder</option>
+                                <option>Operations Manager</option>
+                                <option>IT Manager</option>
+                                <option>Other</option>
+                            </select>
+                            <div class="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none">
+                                <svg class="w-5 h-5 text-purple-600" fill="none" stroke="currentColor"
+                                    viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M19 9l-7 7-7-7"></path>
+                                </svg>
+                            </div>
+                        </div>
                     </div>
                 </div>
 
